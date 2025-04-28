@@ -1,0 +1,56 @@
+version: 1.0
+app:
+  # number of instances
+  instances:
+    # q: consider availability zones? 
+
+    # min number of instances. can be 0 for scale to 0. default to 1.
+    min: 3
+    # max number of instances. defaults to 1 if min == 0, otherwise defaults to min
+    # q: what's the overall limit?
+    max: 6
+  resources:
+    # max cpu, defaults to 1 cpu limit, half of that for min, min >= 1
+    # q: what's the overall limit?
+    # q: do we support fractions?
+    cpu: 2
+    # memory limit is based on cpu value: 1:3 memory ratio, e.g. 1 cpu == 3 gb
+    # ephemeral disk limit will be set to 1GB  
+  # List of environment variables that set for the application
+  # Liberty encrypted values are supported only if referenced in server.xml
+  env:
+    - name: tradeDbHost
+      value: "7a1378af-8dad-4a24-b17c-976f521f2d0e-useast-private.bt1ibm.db2.ibmappdomain.cloud"
+    - name: tradeDbName
+      value: bludb
+    - name: tradeDbPort
+      value: "32466"
+    - name: dbUser
+      value: "89eb8b70"
+    - name: sslconn
+      value: "true"
+      # value: "false"
+    - name: QueueManager
+      value: QM1
+    - name: sslciphersuite
+      value: "TLS_AES_128_GCM_SHA256"
+    - name: mqHost
+      value: 'qm1-0783.qmb56d.private.us-east.mq2.appdomain.cloud'
+    - name: mqPort
+      value: "443"
+    - name: mqChannel
+      value: "CLOUD.APP.SVRCONN"
+    - name: mqUser
+      value: "app"
+  # List of variables that can be referenced in server.xml
+  # Liberty encrypted values are supported
+  services:
+    - crn: "crn:v1:bluemix:public:mqcloud:us-east:a/67165156f10340b4a16f9a90b4d63e27:b56d491e-89d0-40a4-9530-2a134356d25c::"
+    - crn: "crn:v1:bluemix:public:dashdb-for-transactions:us-east:a/67165156f10340b4a16f9a90b4d63e27:7a1378af-8dad-4a24-b17c-976f521f2d0e::"
+  variables:
+    - name: dummyvar
+      value: "dummyvalue"
+
+  # version:
+  version: ""
+  endpoints: public
