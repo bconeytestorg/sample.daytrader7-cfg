@@ -52,5 +52,5 @@ app:
       value: "dummyvalue"
 
   # version:
-  version: ""
+  version: "ba1ac517-27a7-43e5-9feb-12ae7ec182be"
   endpoints: public
